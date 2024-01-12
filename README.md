@@ -174,7 +174,7 @@ As you can see, the `player_churn` attribute of the example data, is the variabl
     ```bash
     export ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
     export REGION=$(aws configure get region)
-    export WORKLOAD=$(python -c "import constants; print(constants.WORKLOAD_NAME.lower())")
+    export WORKLOAD=$(python3 -c "import constants; print(constants.WORKLOAD_NAME.lower())")
     export BUCKET=s3://$WORKLOAD-data-$REGION-$ACCOUNT
     aws s3 cp ./assets/examples/player-churn.csv $BUCKET/raw-data/player-churn.csv
     ```
@@ -202,13 +202,13 @@ To review the best model candidates, that are automatically generated during the
 
 A test script, `inference_test.py`, has been provided to test deriving player churn insights from the deployed model. To execute the test on a sample data, run the following:
 
-1. Change to the `assets` folder:
+1. Using the Cloud9 IDE terminal, change to the `assets` folder:
     ```bash
-    cd asset/test
+    cd ~/environment/player-insights/assets/examples
     ```
 2. Run the test script, supplying the name of the workload endpoint. For example, if the `WORKLOAD_NAME` variable in the `constants.py` file is `PlayerChurn`, then the SageMaker Endpoint name is `PlayerChurn-Endpoint`
     ```bash
-    python churn_inference.py --endpoint-name PlayerChurn-Endpoint
+    python3 churn_inference.py --endpoint-name PlayerChurn-Endpoint
     ```
 
 The output from the test script should look as follows:
