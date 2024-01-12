@@ -141,7 +141,7 @@ Before deploying the guidance code, it needs to be customized to suite your spec
 
 ## Deployment Validation
 
-To verify that the guidance has been successfully deployed, open the [AWS CLoudFormation Console](https://console.aws.amazon.com/cloudformation/), select the AWS region into which you deployed the guidance, and verify that the stack `<WORKLOAD_NAME>-Stack` has a `CREATE_COMPLETE` status. For example, if the `WORKLOAD_NAME` variable in the `constants.py` file is `PlayerChurn`, then the CloudFormation stack name is `PlayerChurn-Stack`.
+To verify that the guidance has been successfully deployed, open the [AWS CloudFormation Console](https://console.aws.amazon.com/cloudformation/), select the AWS region into which you deployed the guidance, and verify that the stack `<WORKLOAD_NAME>-Stack` has a `CREATE_COMPLETE` status. For example, if the `WORKLOAD_NAME` variable in the `constants.py` file is `PlayerChurn`, then the CloudFormation stack name is `PlayerChurn-Stack`.
 
 >__NOTE:__ Make sure to capture the `DataBucketName` value from the __Output__ tab of the CloudFormation stack.
 
