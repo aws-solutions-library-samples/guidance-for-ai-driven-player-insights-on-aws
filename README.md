@@ -242,7 +242,7 @@ There are two options for deleting the deployed guidance:
         ```
     - When prompted, `Are you sure you want to delete`, enter `y` to confirm stack deletion.
 
->__NOTE:__ Deleting the deployed resources will not delete the __Amazon S3__ bucket, in order to protect any training data already stored. See the [Deleting a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html) section of the __Amazon Simple Storage Service__ user guide for the various ways to delete the S3 bucket.
+Deleting the deployed resources will not delete the __Amazon S3__ bucket, in order to protect any training data already stored. See the [Deleting a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html) section of the __Amazon Simple Storage Service__ user guide for the various ways to delete the S3 bucket. Additionally, deleting the deployed resources will not delete the __SageMaker Endpoint__. See the [Delete Endpoints and Resources](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-delete-resources.html) section of the __Amazon SageMaker__ developer guide on how to delete the _Endpoint_, _Endpoint Configuration_, and _Models_.
 
 ## Next Steps
 
