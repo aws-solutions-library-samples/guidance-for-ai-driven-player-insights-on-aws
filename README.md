@@ -112,11 +112,11 @@ Before deploying the guidance code, it needs to be customized to suite your spec
         - ___Type:___ String
         - ___Example:___ `"d-abcdef12gh3i"`
     - `DATA_FILE`
-        - ___Description:___ The name of the comma-separated values (CSV) file representing your player data.
+        - ___Description:___ The name of the comma-separated values (CSV) file representing your player data. (See [Player churn data](#player-churn-data) for more information.)
         - ___Type:___ String
         - ___Example:___ `"player-churn.csv"`
     - `TARGET_ATTRIBUTE`
-        - ___Description:___ The name of the target variable column of the `DATA_FILE` that you wish to train the machine learning model to predict on.
+        - ___Description:___ The name of the target variable column of the `DATA_FILE` that you wish to train the machine learning model to predict on. (See [Player churn data](#player-churn-data) for more information.)
         - ___Type:___ String
         - ___Example:___ `"player_churn"`
     - `PERFORMANCE_THRESHOLD`
