@@ -18,8 +18,16 @@ class Endpoint(Construct):
         self.function = _lambda.Function(
             self,
             "EndpointFunction",
-            runtime=_lambda.Runtime.PYTHON_3_8,
-            code=_lambda.Code.from_asset(os.path.join(os.path.dirname(__file__), "runtime")),
+            runtime=_lambda.Runtime.PYTHON_3_11,
+            code=_lambda.Code.from_asset(
+                os.path.join(os.path.dirname(__file__), "runtime"),
+                bundling=cdk.BundlingOptions(
+                    image=_lambda.Runtime.PYTHON_3_11.bundling_image,
+                    command=[
+                        "bash", "-c", "pip install -r requirements.txt -t /asset-output && cp -au . /asset-output"
+                    ]
+                )
+            ),
             handler="index.lambda_handler",
             timeout=cdk.Duration.seconds(amount=60)
         )

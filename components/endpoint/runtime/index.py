@@ -4,11 +4,16 @@
 import json
 import boto3
 import time
-from botocore.exceptions import ClientError
 
+from botocore.exceptions import ClientError
+from aws_lambda_powertools import Tracer
+from aws_lambda_powertools import Logger
+
+logger = Logger()
+tracer = Tracer()
 sm_client = boto3.client("sagemaker")
 
-
+@tracer.capture_lambda_handler
 def lambda_handler(event, context):
 
     # The name of the model created in the Pipeline CreateModelStep
@@ -23,7 +28,7 @@ def lambda_handler(event, context):
 
     try:
         # Create the SageMaker Endpoint Configuration, based on the current time
-        print("Creating Endpoint Config")
+        logger.info("Creating Endpoint Config")
         if endpoint_type == "SERVERLESS": 
             response = sm_client.create_endpoint_config(
                 EndpointConfigName=endpoint_config_name,
@@ -65,7 +70,7 @@ def lambda_handler(event, context):
             )
         else:
             raise Exception("Invalid Endpoint Type. Please spcify 'HOSTED' or 'SERVERLESS'")
-        print(f"Endpoint Config: {response['EndpointConfigArn']}")
+        logger.info(f"Endpoint Config: {response['EndpointConfigArn']}")
         response_body["EndpointConfigArn"] = response["EndpointConfigArn"]
 
     except ClientError as e:
@@ -74,18 +79,18 @@ def lambda_handler(event, context):
 
     try:
         # Update the SageMaker Endpoint with the new configuration
-        print("Updating Existing Endpoint")
+        logger.info("Updating Existing Endpoint")
         response = sm_client.update_endpoint(
             EndpointName=endpoint_name,
             EndpointConfigName=endpoint_config_name
         )
         response_body["EndpointArn"] = response["EndpointArn"]
     except ClientError as e:
-        print(f"Existing Endpoint Not Found")
-        print(f"{e.response['Error']['Message']}") #Debug
+        logger.info(f"Existing Endpoint Not Found")
+        logger.info(f"{e.response['Error']['Message']}") #Debug
         try:
             # Create the SageMaker Endpoint
-            print("Creating New Endpoint")
+            logger.info("Creating New Endpoint")
             response = sm_client.create_endpoint(
                 EndpointName=endpoint_name,
                 EndpointConfigName=endpoint_config_name,
@@ -96,7 +101,7 @@ def lambda_handler(event, context):
                     }
                 ]
             )
-            print(f"Endpoint: {response['EndpointArn']}")
+            logger.info(f"Endpoint: {response['EndpointArn']}")
             response_body["EndpointArn"] = response["EndpointArn"]
         
         except ClientError as e:
