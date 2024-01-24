@@ -17,8 +17,8 @@
     - [Player churn data](#player-churn-data)
     - [Player churn model](#player-churn-model)
     - [Player churn prediction](#player-churn-prediction)
-6. [Cleanup](#cleanup)
-7. [Next Steps](#next-steps)
+6. [Next Steps](#next-steps)
+7. [Cleanup](#cleanup)
 
 ## Overview
 
@@ -45,9 +45,9 @@ _You are responsible for the cost of the AWS services used while running this Gu
 
 ### Operating System
 
-These deployment instructions are optimized to best work on a pre-configured **Amazon Linux 2023** [AWS Cloud9](https://aws.amazon.com/cloud9/) development environment.  Deployment using another OS may require additional steps, and configured python libraries(see [Third-party tools](#third-party-tools)).
+These deployment instructions are optimized to best work on a pre-configured **Amazon Linux 2023** [AWS Cloud9](https://aws.amazon.com/cloud9/) development environment. Refer to the [Individual user setup for AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup-express.html) for more information on how to set up Cloud9 as a user in the AWS account. Deployment using another OS may require additional steps, and configured python libraries(see [Third-party tools](#third-party-tools)). 
 
->__NOTE:__ Refer to the [Individual user setup for AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup-express.html) for more information on how to set up Cloud9 as the only user in the AWS Account.
+>__NOTE:__ A Github [dev container](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers) configuration has been provided should you wish to use [GitHub codespaces](https://docs.github.com/en/codespaces), or [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) as your development environment.
 
 ### Third-party tools
 
@@ -219,7 +219,13 @@ Sending inference request with test payload ...
 SageMaker returned the following response: False
 ```
 
-As you can see, the deployed player churn model predicts that, based on the sample player event data, this sample player is __NOT__ predicted to leave the game.
+As you can see, the deployed player churn model predicts that, based on the sample player event data, this sample player is __NOT__ predicted to leave the game. At this point, the game client, or game servers can be configured to call the player churn model to make predictions for new users, based on their event telemetry.
+
+## Next Steps
+
+Each deployment of the guidance is specific to a unique business case, and the supporting labeled dataset. For each use case, update the `constants.py` with the variables specific to the use case and the dataset, and then deploy the CDK application, as shown in the [Deployment Steps](#deployment-steps) section.
+
+To update, and generate a newer version of the deployed model with newer data, simply add the updated dataset to the __Amazon S3__ bucket. The __SageMaker Endpoint__ will be automatically updated with the newer version of the best model.
 
 ## Cleanup
 
@@ -243,9 +249,3 @@ There are two options for deleting the deployed guidance:
     - When prompted, `Are you sure you want to delete`, enter `y` to confirm stack deletion.
 
 Deleting the deployed resources will not delete the __Amazon S3__ bucket, in order to protect any training data already stored. See the [Deleting a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html) section of the __Amazon Simple Storage Service__ user guide for the various ways to delete the S3 bucket. Additionally, deleting the deployed resources will not delete the __SageMaker Endpoint__. See the [Delete Endpoints and Resources](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-delete-resources.html) section of the __Amazon SageMaker__ developer guide on how to delete the _Endpoint_, _Endpoint Configuration_, and _Models_.
-
-## Next Steps
-
-Each deployment of the guidance is specific to a unique business case, and the supporting labeled dataset. For each use case, update the `constants.py` with the variables specific to the use case and the dataset, and then deploy the CDK application, as shown in the [Deployment Steps](#deployment-steps) section.
-
-To update, and generate a newer version of the deployed model with newer data, simply add the updated dataset to the __Amazon S3__ bucket. The __SageMaker Endpoint__ will be automatically updated with the newer version of the best model.
