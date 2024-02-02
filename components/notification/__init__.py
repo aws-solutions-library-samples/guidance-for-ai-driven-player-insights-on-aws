@@ -55,7 +55,8 @@ class Notification(Construct):
                 actions=["sagemaker:StartPipelineExecution"],
                 effect=_iam.Effect.ALLOW,
                 resources=[
-                    f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:pipeline/{constants.WORKLOAD_NAME.lower()}-automlpipeline"
+                    f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:pipeline/{constants.WORKLOAD_NAME.lower()}-automlpipeline",
+                    f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:pipeline/{constants.WORKLOAD_NAME}-AutoMLPipeline"
                 ]
             )
         )

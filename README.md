@@ -53,11 +53,11 @@ These deployment instructions are optimized to best work on a pre-configured **A
 
 Before deploying the guidance code, ensure that the following required tools have been installed:
 
-- AWS Cloud Development Kit (CDK) >= 2.118
+- AWS Cloud Development Kit (CDK) >= 2.126
 - Python >= 3.8
 - NodeJS >= 18
 
->__NOTE:__ The Guidance has been tested using AWS CDK version 2.118. If you wish to update the CDK application to later version, make sure to update the `requirements.txt` file, in the root of the repository, with the updated version of the AWS CDK.
+>__NOTE:__ The Guidance has been tested using AWS CDK version 2.126. If you wish to update the CDK application to later version, make sure to update the `requirements.txt` file, in the root of the repository, with the updated version of the AWS CDK.
 
 ### AWS account requirements
 
