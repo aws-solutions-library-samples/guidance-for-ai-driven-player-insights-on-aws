@@ -13,6 +13,7 @@ app = cdk.App()
 AutoMLStack(
     app,
     f"{constants.WORKLOAD_NAME}-Stack",
+    description="Guidance for AI-driven player insights on AWS (SO9401)",
     env=cdk.Environment(
         account=boto3.client("sts").get_caller_identity()["Account"],
         region=constants.REGION
