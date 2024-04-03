@@ -45,7 +45,8 @@ class Endpoint(Construct):
                 resources=[
                     f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:endpoint/{constants.WORKLOAD_NAME}*",
                     f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:endpoint/{constants.WORKLOAD_NAME.lower()}*",
-                    f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:endpoint-config/{constants.WORKLOAD_NAME.lower()}*"
+                    f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:endpoint-config/{constants.WORKLOAD_NAME.lower()}*",
+                    f"arn:{cdk.Aws.PARTITION}:sagemaker:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:endpoint-config/{constants.WORKLOAD_NAME}*"
                 ]
             )
         )
